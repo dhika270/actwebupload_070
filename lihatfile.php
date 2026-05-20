@@ -55,6 +55,20 @@ $files = scandir($folder);
         border-radius:10px;
     }
 
+    .file-info{
+        display:flex;
+        align-items:center;
+        gap:15px;
+    }
+
+    .file-info img{
+        width:70px;
+        height:70px;
+        object-fit:cover;
+        border-radius:10px;
+        background:white;
+    }
+
     .actions{
         display:flex;
         gap:10px;
@@ -70,6 +84,11 @@ $files = scandir($folder);
     .lihat{
         background:white;
         color:#5b21b6;
+    }
+
+    .download{
+        background:#22c55e;
+        color:white;
     }
 
     .delete{
@@ -103,12 +122,26 @@ $files = scandir($folder);
             echo "
             <div class='file-box'>
 
-                <span>$file</span>
+                <div class='file-info'>
+
+                    <img src='uploads/$file'>
+
+                    <span>$file</span>
+
+                </div>
 
                 <div class='actions'>
 
                     <a class='lihat' href='uploads/$file' target='_blank'>
                         Lihat
+                    </a>
+
+                    <a 
+                        class='download'
+                        href='uploads/$file'
+                        download
+                    >
+                        Download
                     </a>
 
                     <a 

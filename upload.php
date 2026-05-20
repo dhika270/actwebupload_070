@@ -130,12 +130,16 @@ if (isset($_POST["upload"]) && isset($_FILES["fileToUpload"])) {
     </div>
 
     <input 
-        type="file"
-        name="fileToUpload"
-        id="fileInput"
-        required
-        hidden
-    >
+    type="file"
+    name="fileToUpload"
+    id="fileInput"
+    hidden
+    required
+>
+
+<p id="fileName" style="margin-top:10px; text-align:center;">
+    Belum ada file dipilih
+</p>
 
     <button type="submit" name="upload">
         Upload
@@ -154,6 +158,45 @@ if (isset($_POST["upload"]) && isset($_FILES["fileToUpload"])) {
     </a>
 
 </div>
+<script>
 
+const fileInput = document.getElementById("fileInput");
+const dropArea = document.querySelector(".drop-area");
+const fileName = document.getElementById("fileName");
+
+fileInput.addEventListener("change", function(){
+
+    const oldPreview = document.getElementById("previewImage");
+
+    if(oldPreview){
+        oldPreview.remove();
+    }
+
+    if(this.files && this.files[0]){
+
+        fileName.innerText = "File dipilih: " + this.files[0].name;
+
+        const img = document.createElement("img");
+
+        img.id = "previewImage";
+
+        img.src = URL.createObjectURL(this.files[0]);
+
+        img.style.width = "180px";
+        img.style.marginTop = "20px";
+        img.style.borderRadius = "15px";
+        img.style.objectFit = "cover";
+
+        dropArea.appendChild(img);
+
+    }else{
+
+        fileName.innerText = "Belum ada file dipilih";
+
+    }
+
+});
+
+</script>
 </body>
 </html>
